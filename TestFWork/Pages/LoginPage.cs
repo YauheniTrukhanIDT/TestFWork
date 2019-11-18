@@ -1,21 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
+using TestFWork.Constants;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
-    class LoginPage
+    class LoginPage : BasePage
     {
-
-        IWebDriver driver;
-
-        private By byLogoutLink = By.Id("PH_logoutLink");
-
-        private By byStartMail = By.XPath("//a [@class = 'logo__img']");
-
-        private By byInputPassword = By.Id("mailbox:password");
-
         [FindsBy(How = How.Id, Using = "mailbox:login")]
         private IWebElement loginField { get; set; }
 
@@ -25,30 +16,30 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//input [@type = 'submit']")]
         private IWebElement buttonMail { get; set; }
 
-        [Obsolete]
-        public LoginPage(IWebDriver driver)
+        [FindsBy(How = How.Id, Using = "PH_logoutLink")]
+        private IWebElement logoutLink { get; set; }
+
+        public LoginPage()
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        [Obsolete]
-        public HomePage Login(string login, string password)
+        public HomePage Login()
         {
-            WebDriverWaitUtil.DriverWait(driver, byStartMail);
-            loginField.SendText(login);
+            WebDriverWaitUtil.WaitElementIsVisible(loginField);
+            loginField.SendText(UserConstants.Login);
             buttonMail.ClickElement();
-            WebDriverWaitUtil.DriverWait(driver, byInputPassword);
-            passwordField.SendText(password);
+            WebDriverWaitUtil.WaitElementIsVisible(passwordField);
+            passwordField.SendText(UserConstants.Password);
             buttonMail.ClickElement();
-            WebDriverWaitUtil.DriverWait(driver, byLogoutLink);
-            return new HomePage(driver);
+            WebDriverWaitUtil.WaitElementIsVisible(logoutLink);
+            return new HomePage();
         }
 
-        [Obsolete]
         public bool IsLogoutLinkDisplayed()        
         {
-            return WebDriverWaitUtil.ElementDisplayed(driver, byLogoutLink);
+            WebDriverWaitUtil.WaitElementIsVisible(logoutLink);
+            return;
         }
     }
 }

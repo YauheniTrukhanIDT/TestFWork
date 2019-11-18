@@ -1,19 +1,14 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
+using TestFWork.Constants;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
-    class SendLetterPage
+    class SendLetterPage : BasePage
     {
-        private IWebDriver driver;
-
-        private By byLetterSent = By.XPath("(//a [@class = 'layer__link'])[1]");
-
-        private By byWindowWriteMessage = By.XPath("(//input [@class = 'container--H9L5q size_s--3_M-_'])[1]");
-
-        private By byWriteMessage = By.XPath("//span [@class = 'compose-button__wrapper']");
+        [FindsBy(How = How.XPath, Using = "(//a [@class = 'layer__link'])[1]")]
+        private IWebElement smsLetterSent { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//span [@class = 'compose-button__wrapper']")]
         private IWebElement buttonWriteLetter { get; set; }
@@ -30,30 +25,27 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//span [text() = 'Отправить']")]
         private IWebElement sendButton { get; set; }
 
-        [Obsolete]
-        public SendLetterPage(IWebDriver driver)
+        public SendLetterPage()
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        [Obsolete]
-        public void WriteMessage(string addressee, string theme, string message)
+        public void WriteMessage()
         {
-            WebDriverWaitUtil.DriverWait(driver, byWriteMessage);
+            WebDriverWaitUtil.WaitElementIsVisible(buttonWriteLetter);
             buttonWriteLetter.ClickElement();
-            WebDriverWaitUtil.DriverWait(driver, byWindowWriteMessage);
-            recipient.SendText(addressee);
-            subject.SendText(theme);
+            WebDriverWaitUtil.WaitElementIsVisible(recipient);
+            recipient.SendText(MailRuConstants.Addressee);
+            subject.SendText(MailRuConstants.Theme);
             textMessage.ClickElement();
-            textMessage.SendText(message);
+            textMessage.SendText(MailRuConstants.Message);
             sendButton.ClickElement();
         }
 
-        [Obsolete]
         public bool IsSendMessageDisplayed()
         {
-            return WebDriverWaitUtil.ElementDisplayed(driver, byLetterSent);
+            WebDriverWaitUtil.WaitElementIsVisible(smsLetterSent);
+            return smsLetterSent.Displayed;
         }
     }
 }

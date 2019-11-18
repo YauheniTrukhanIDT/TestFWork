@@ -1,15 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
-    class HomePage
-    {
-        private IWebDriver driver;
-
+    class HomePage : BasePage
+    {        
         private By byInboxLetter = By.XPath("//div [@class = 'nav__folder nav__folder_parent']");
 
         private By bySpamMessage = By.XPath("//span [@class = 'notify__message__text']");
@@ -21,9 +18,7 @@ namespace TestFWork.Pages
         private By byDropDown = By.XPath("//span [@class = 'filters-control__filter-text']");
 
         private By byListDropDown = By.XPath("//div [@class = 'list list_hover-support']");
-
-        private static int unRead = 1;
-
+                
         [FindsBy(How = How.XPath, Using = "//span [@title = 'Спам']")]
         private IWebElement spamButton { get; set; }
 
@@ -45,32 +40,27 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//span [@class = 'll-rs ll-rs_is-active']")]
         private IList<IWebElement> unReadLetters { get; set; }
 
-        [System.Obsolete]
-        public HomePage(IWebDriver driver)
+        public HomePage()
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        [System.Obsolete]
         public void SendToSpam()
         {
-            WebDriverWaitUtil.DriverWait(driver, byInboxLetter);
+            WebDriverWaitUtil.WaitElementIsVisible(byInboxLetter);
             letters[1].ClickElement();
-            WebDriverWaitUtil.DriverWait(driver, bySpamButton);
+            WebDriverWaitUtil.WaitElementIsVisible(bySpamButton);
             spamButton.ClickElement();
         }
 
-        [System.Obsolete]
         public bool IsSendToSpamMessageDisplayed()
         {
-            return WebDriverWaitUtil.ElementDisplayed(driver, bySpamMessage);
+            return WebDriverWaitUtil.ElementDisplayed(bySpamMessage);
         }
 
-        [System.Obsolete]
         public void MarkLettersByFlag()
         {
-            WebDriverWaitUtil.DriverWait(driver, byInboxLetter);
+            WebDriverWaitUtil.WaitElementIsVisible(byInboxLetter);
             foreach (IWebElement ltrs in buttonMarkFlages)
             {
                 ltrs.ClickElement();
@@ -82,19 +72,17 @@ namespace TestFWork.Pages
             return lettersMarkFlages.Count;
         }
 
-        [System.Obsolete]
         public void DropDownList()
         {
-            WebDriverWaitUtil.DriverWait(driver, byDropDown);
+            WebDriverWaitUtil.WaitElementIsVisible(byDropDown);
             dropDownLetters.ClickElement();
-            WebDriverWaitUtil.DriverWait(driver, byListDropDown);
+            WebDriverWaitUtil.WaitElementIsVisible(byListDropDown);
             dropDownUnReadLetters.ClickElement();
         }
 
-        [System.Obsolete]
         public int CountUnReadLetters()
         {
-            WebDriverWaitUtil.DriverWait(driver, byReadLetters);
+            WebDriverWaitUtil.WaitElementIsVisible(byReadLetters);
             return unReadLetters.Count;
         }
     }    

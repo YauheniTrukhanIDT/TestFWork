@@ -2,9 +2,8 @@
 
 namespace TestFWork.Pages
 {
-    static class BaseComponent
+    public static class BaseComponent
     {
-
         public static void ClickElement(this IWebElement element)
         {
             element.Click();
@@ -14,6 +13,11 @@ namespace TestFWork.Pages
         {
             element.Clear();
             element.SendKeys(text);
+        }
+
+        public static string GetAttributeElement(this IWebElement element, string attribute)
+        {
+            return element.GetAttribute(attribute);
         }
     }
 }

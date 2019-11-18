@@ -1,28 +1,38 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using TestFWork.Constants;
 
 namespace TestFWork.Utils
 {
-    class WebDriverWaitUtil
-    {
-        private static int timeOut = 10;
-
-        private WebDriverWaitUtil() 
+    public static class WebDriverWaitUtil
         {
+        private static WebDriverWait wait;
+
+        public static void WaitElementIsVisible(By locator)
+        {
+            new WebDriverWait(WebDriverUtil.GetWebDriver(), TimeSpan.FromSeconds(WebDriverWaitConstants.TimeOut)).Until(ExpectedConditions.ElementIsVisible(locator));
         }
 
-        [System.Obsolete]
-        public static IWebElement DriverWait(IWebDriver driver, By locator)
+        public static void WaitElementIsVisible(IWebElement element)
         {
-            return new WebDriverWait(driver, TimeSpan.FromSeconds(timeOut)).Until(ExpectedConditions.ElementIsVisible(locator));
+            new WebDriverWait(WebDriverUtil.GetWebDriver(), TimeSpan.FromSeconds(WebDriverWaitConstants.TimeOut))
+                .Until(WaitElementVisible(element));
         }
 
-        [Obsolete]
-        public static bool ElementDisplayed(IWebDriver driver, By locator)
+        private static Func<IWebDriver, bool> WaitElementVisible(IWebElement element)
         {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(timeOut)).Until(condition: ExpectedConditions.PresenceOfAllElementsLocatedBy(locator));
-            return driver.FindElement(locator).Displayed;
+            return driver =>
+            {
+                try
+                {
+                    return element.Displayed;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            };
         }
     }
 }

@@ -64,6 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\MailRuConstants.cs" />
+    <Compile Include="Constants\UserConstants.cs" />
+    <Compile Include="Constants\WebDriverWaitConstants.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Pages\BaseComponent.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\HomePage.cs" />

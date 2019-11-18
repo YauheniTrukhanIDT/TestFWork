@@ -5,18 +5,22 @@ namespace TestFWork.Utils
 {
     class WebDriverUtil
     {
-          private static IWebDriver driver;
+            private static IWebDriver driver;
                                             
             private WebDriverUtil()
             {
             }
 
-            public static IWebDriver Init()
+            public static void Init()
             {
                 if (driver == null)
                 {
                     driver = new ChromeDriver();
                 }
+            }
+
+            public static IWebDriver GetWebDriver()
+            {
                 return driver;
             }
 

@@ -1,14 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
-     static class BasePage
+    public class BasePage : BaseComponent
     {
-        private static string attribute;
-
-        public static string GetAttributeElement(this IWebElement element)
+        public string GetPageTitle()
         {
-            return element.GetAttribute(attribute);
+            return WebDriverUtil.GetWebDriver().Title;
         }
     }
 }
