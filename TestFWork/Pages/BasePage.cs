@@ -2,13 +2,16 @@
 
 namespace TestFWork.Pages
 {
-     static class BasePage
+    public class BasePage
     {
-        private static string attribute;
-
-        public static string GetAttributeElement(this IWebElement element)
+          //delete
+        //private static string attribute;
+          //move to BaseComponent
+        public string GetAttributeElement(this IWebElement element, string attribute)
         {
             return element.GetAttribute(attribute);
         }
+          
+        //public string GetPageTitle(){ return WDUtils.GetWD().Title;
     }
 }
