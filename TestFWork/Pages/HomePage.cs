@@ -6,6 +6,7 @@ using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
+//class HomePage : BasePage
     class HomePage
     {
         private IWebDriver driver;
