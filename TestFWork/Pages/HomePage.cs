@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
@@ -16,6 +16,14 @@ namespace TestFWork.Pages
 
         private By bySpamButton = By.XPath("//span [@title = 'Спам']");
 
+        private By byReadLetters = By.XPath("(//span [@class = 'button2__wrapper'])[2]");
+
+        private By byDropDown = By.XPath("//span [@class = 'filters-control__filter-text']");
+
+        private By byListDropDown = By.XPath("//div [@class = 'list list_hover-support']");
+
+        private static int unRead = 1;
+
         [FindsBy(How = How.XPath, Using = "//span [@title = 'Спам']")]
         private IWebElement spamButton { get; set; }
 
@@ -27,6 +35,15 @@ namespace TestFWork.Pages
 
         [FindsBy(How = How.XPath, Using = "//button [@class = 'll-fs ll-fs_is-active']")]
         private IList<IWebElement> lettersMarkFlages { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div [@class = 'filters-control filters-control_short filters-control_pure']")]
+        private IWebElement dropDownLetters { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//div [@class = 'list-item list-item_hover-support list-item_markable'])[2]")]
+        private IWebElement dropDownUnReadLetters { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//span [@class = 'll-rs ll-rs_is-active']")]
+        private IList<IWebElement> unReadLetters { get; set; }
 
         [System.Obsolete]
         public HomePage(IWebDriver driver)
@@ -63,6 +80,22 @@ namespace TestFWork.Pages
         public int GetCountMarkedByFlags()
         {
             return lettersMarkFlages.Count;
+        }
+
+        [System.Obsolete]
+        public void DropDownList()
+        {
+            WebDriverWaitUtil.DriverWait(driver, byDropDown);
+            dropDownLetters.ClickElement();
+            WebDriverWaitUtil.DriverWait(driver, byListDropDown);
+            dropDownUnReadLetters.ClickElement();
+        }
+
+        [System.Obsolete]
+        public int CountUnReadLetters()
+        {
+            WebDriverWaitUtil.DriverWait(driver, byReadLetters);
+            return unReadLetters.Count;
         }
     }    
 }

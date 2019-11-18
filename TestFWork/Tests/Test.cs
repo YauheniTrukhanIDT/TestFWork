@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.ObjectModel;
 using TestFWork.Pages;
 using TestFWork.Utils;
 
@@ -78,15 +76,14 @@ namespace UnitTestProject1
             Assert.IsTrue(homePage.GetCountMarkedByFlags() > 0);
         }
 
-        //[Test]
-        //[Obsolete]
-        //public void DropDown()
-        //{
-        //  wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a [@title = 'Входящие']")));
-        //IWebElement element = driver.FindElement(By.XPath("//div [@class = 'select__control']"));
-        //SelectElement selectElement = new SelectElement(element);
-        //selectElement.SelectByIndex(3);
-        //}
+        [Test]
+        [Obsolete]
+        public void DropDown()
+        {
+            loginPage.Login(login, password);
+            homePage.DropDownList();
+            Assert.IsTrue(homePage.CountUnReadLetters() > 0);
+        }
 
         [TearDown]
         public void TearDownTest()
