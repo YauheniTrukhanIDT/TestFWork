@@ -12,6 +12,8 @@ namespace TestFWork.Utils
         {
         }
 
+        //Delete IWebDriver driver
+        //WaitElememtIsVisible(By loc)
         [System.Obsolete]
         public static IWebElement DriverWait(IWebDriver driver, By locator)
         {
