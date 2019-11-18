@@ -9,6 +9,7 @@ namespace UnitTestProject1
     [TestFixture]
     public class Test
     {
+        //delete
         private IWebDriver driver;
 
         private LoginPage loginPage;
@@ -17,14 +18,19 @@ namespace UnitTestProject1
 
         private SendLetterPage sendLetterPage;
 
-        private static string mailRu = "https://mail.ru/";
+        
 
+        // class User;
+        // static User GetDefaultUser() -> return new User(name, password)
+        //Name + Pswrd - >> UserConstants.
         private static string login = "jora.pog";
 
         private static string password = "korol_eva";
 
+        //EmailConstants
+        //EmailConstants.MailRuUrl;
         private static string addressee = "truhanzhenya@mail.ru";
-
+        private static string MailRuUrl = "https://mail.ru/";
         private static string theme = "Test";
 
         private static string message = "Hi!";
@@ -36,6 +42,10 @@ namespace UnitTestProject1
             driver = WebDriverUtil.Init();
             driver.Url = mailRu;
             driver.Manage().Window.Maximize();
+            
+            // move login to setup
+            //loginPage.Login(User.GetDefaultUser());
+            //delete
             loginPage = new LoginPage(driver);
             homePage = new HomePage(driver);
             sendLetterPage = new SendLetterPage(driver);
@@ -45,7 +55,10 @@ namespace UnitTestProject1
         [Obsolete]
         public void EnterMailRu()
         {
+            // LoginPage loginPage = new LoginPage();
+            //loginPage.Login(User.GetDefaultUser());
             loginPage.Login(login, password);
+            //HomePage hp = loginPage.Login(login, password);
             Assert.IsTrue(loginPage.IsLogoutLinkDisplayed());
         }
 
