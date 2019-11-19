@@ -16,6 +16,6 @@ namespace TestFWork.Constants
 
         public const string Message = "Hi!";
 
-        public const int unRead = 1;
+        public const string SearchLetters = "Почта Mail.ru";
     }
 }

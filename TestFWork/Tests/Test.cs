@@ -51,6 +51,14 @@ namespace UnitTestProject1
             Assert.IsTrue(homePage.CountUnReadLetters() > 0);
         }
 
+        [Test]
+        public void SearchLetters()
+        {
+            SearchPage searchPage = new SearchPage();
+            searchPage.SearchLetter();
+            Assert.IsTrue(searchPage.GetCountSearchLetters() > 0);
+        }
+
         [TearDown]
         public void TearDownTest()
         {
