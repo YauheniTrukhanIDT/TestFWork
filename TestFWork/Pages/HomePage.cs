@@ -34,7 +34,7 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//button [@class = 'll-fs ll-fs_is-active']")]
         private IList<IWebElement> lettersMarkFlages { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div [@class = 'filters-control filters-control_short filters-control_pure']")]
+        [FindsBy(How = How.XPath, Using = "//div [@class = 'filters-control__arrow-down-icon']")]
         private IWebElement dropDownLetters { get; set; }
 
         [FindsBy(How = How.XPath, Using = "(//div [@class = 'list-item list-item_hover-support list-item_markable'])[2]")]

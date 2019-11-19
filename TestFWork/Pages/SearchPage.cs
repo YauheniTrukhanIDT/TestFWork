@@ -6,7 +6,7 @@ using TestFWork.Utils;
 
 namespace TestFWork.Pages
 {
-    class SearchPage
+    class SearchPage : BasePage
     {
         [FindsBy(How = How.XPath, Using = "//span [@class = 'search-panel-button__icon']")]
         private IWebElement buttonSearchLetter { get; set; }
