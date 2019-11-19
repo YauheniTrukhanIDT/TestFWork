@@ -6,18 +6,21 @@ using TestFWork.Utils;
 namespace TestFWork.Pages
 {
     class HomePage : BasePage
-    {        
-        private By byInboxLetter = By.XPath("//div [@class = 'nav__folder nav__folder_parent']");
+    {   
+        [FindsBy(How = How.XPath, Using = "//div [@class = 'nav__folder nav__folder_parent']")]
+        private IWebElement inboxLetter { get; set; } 
 
-        private By bySpamMessage = By.XPath("//span [@class = 'notify__message__text']");
+        [FindsBy(How = How.XPath, Using = "//span [@class = 'notify__message__text']")]
+        private IWebElement spamMessage { get; set; }
 
-        private By bySpamButton = By.XPath("//span [@title = 'Спам']");
+        [FindsBy(How = How.XPath, Using = "(//span [@class = 'button2__wrapper'])[2]")]
+        private IWebElement readLetters { get; set; }
 
-        private By byReadLetters = By.XPath("(//span [@class = 'button2__wrapper'])[2]");
+        [FindsBy(How = How.XPath, Using = "//span [@class = 'filters-control__filter-text']")]
+        private IWebElement dropDown { get; set; }
 
-        private By byDropDown = By.XPath("//span [@class = 'filters-control__filter-text']");
-
-        private By byListDropDown = By.XPath("//div [@class = 'list list_hover-support']");
+        [FindsBy(How = How.XPath, Using = "//div [@class = 'list list_hover-support']")]
+        private IWebElement listDropDown { get; set; }
                 
         [FindsBy(How = How.XPath, Using = "//span [@title = 'Спам']")]
         private IWebElement spamButton { get; set; }
@@ -47,20 +50,21 @@ namespace TestFWork.Pages
 
         public void SendToSpam()
         {
-            WebDriverWaitUtil.WaitElementIsVisible(byInboxLetter);
+            WebDriverWaitUtil.WaitElementIsVisible(inboxLetter);
             letters[1].ClickElement();
-            WebDriverWaitUtil.WaitElementIsVisible(bySpamButton);
+            WebDriverWaitUtil.WaitElementIsVisible(spamButton);
             spamButton.ClickElement();
         }
 
         public bool IsSendToSpamMessageDisplayed()
         {
-            return WebDriverWaitUtil.ElementDisplayed(bySpamMessage);
+            WebDriverWaitUtil.WaitElementIsVisible(spamMessage);
+            return spamMessage.Displayed && spamMessage.Enabled;
         }
 
         public void MarkLettersByFlag()
         {
-            WebDriverWaitUtil.WaitElementIsVisible(byInboxLetter);
+            WebDriverWaitUtil.WaitElementIsVisible(inboxLetter);
             foreach (IWebElement ltrs in buttonMarkFlages)
             {
                 ltrs.ClickElement();
@@ -74,15 +78,15 @@ namespace TestFWork.Pages
 
         public void DropDownList()
         {
-            WebDriverWaitUtil.WaitElementIsVisible(byDropDown);
+            WebDriverWaitUtil.WaitElementIsVisible(dropDown);
             dropDownLetters.ClickElement();
-            WebDriverWaitUtil.WaitElementIsVisible(byListDropDown);
+            WebDriverWaitUtil.WaitElementIsVisible(listDropDown);
             dropDownUnReadLetters.ClickElement();
         }
 
         public int CountUnReadLetters()
         {
-            WebDriverWaitUtil.WaitElementIsVisible(byReadLetters);
+            WebDriverWaitUtil.WaitElementIsVisible(readLetters);
             return unReadLetters.Count;
         }
     }    

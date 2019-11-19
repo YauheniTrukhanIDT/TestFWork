@@ -38,8 +38,7 @@ namespace TestFWork.Pages
 
         public bool IsLogoutLinkDisplayed()        
         {
-            WebDriverWaitUtil.WaitElementIsVisible(logoutLink);
-            return;
+            return logoutLink.Displayed && logoutLink.Enabled;                                     
         }
     }
 }

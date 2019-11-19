@@ -45,7 +45,7 @@ namespace TestFWork.Pages
         public bool IsSendMessageDisplayed()
         {
             WebDriverWaitUtil.WaitElementIsVisible(smsLetterSent);
-            return smsLetterSent.Displayed;
+            return smsLetterSent.Displayed && smsLetterSent.Enabled;
         }
     }
 }
