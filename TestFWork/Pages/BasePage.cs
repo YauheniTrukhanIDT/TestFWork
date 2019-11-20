@@ -2,7 +2,7 @@
 
 namespace TestFWork.Pages
 {
-    public class BasePage : BaseComponent
+    public class BasePage
     {
         public string GetPageTitle()
         {

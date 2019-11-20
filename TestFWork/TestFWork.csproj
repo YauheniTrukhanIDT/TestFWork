@@ -36,13 +36,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Release\TestFWork.dll\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -80,7 +81,9 @@
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Pages\SendLetterPage.cs" />
-    <Compile Include="Tests\Test.cs" />
+    <Compile Include="Tests\Test.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\WebDriverWaitUtil.cs" />
     <Compile Include="Utils\WebDriverUtil.cs" />
