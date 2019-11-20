@@ -8,7 +8,7 @@ namespace TestFWork.Pages
 {
     class SearchPage : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//span [@class = 'search-panel-button__icon']")]
+        [FindsBy(How = How.XPath, Using = "//span [@class = '_1Sq-e9MVzbKWUgdGRPfVlE']")]
         private IWebElement buttonSearchLetter { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//input [@class = '_1BEp2b6vqOez8I6Rw9SpK6 _3pRLYQt59tmiwn0Ugfy9W5']")]
@@ -22,14 +22,23 @@ namespace TestFWork.Pages
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public void SearchLetter()
+        public void ClickInputSearchLetter()
+        {            
+            buttonSearchLetter.ClickElement();
+        }
+
+        public void SendTextInputSearchLetter()
+        { 
+            inputSearchLetter.SendText(MailRuConstants.SearchLetters);
+        }
+
+        public void ClickButtonSearchLetter()
         {
             WebDriverWaitUtil.WaitElementIsVisible(buttonSearchLetter);
-            inputSearchLetter.ClickElement();
-            inputSearchLetter.SendText(MailRuConstants.SearchLetters);
+            buttonSearchLetter.ClickElement();
             WebDriverWaitUtil.WaitElementIsVisible(listSearchLetters[1]);
-        }     
-        
+        }
+
         public int GetCountSearchLetters()
         {
             return listSearchLetters.Count;

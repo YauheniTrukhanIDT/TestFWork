@@ -50,11 +50,13 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//a [@href = '/spam/']")]
         private IWebElement windowSpam { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div [@class = 'portal-menu-element__text']")]
+        [FindsBy(How = How.XPath, Using = "(//span [@class = 'button2__wrapper'])[1]")]
         private IWebElement imageSpam { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//h2 [@class = 'thread__subject']")]
         private IWebElement subjectLetter { get; set; }
+
+        List<String> listEmailSubject = new List<string>();
 
         public HomePage()
         {
@@ -69,6 +71,7 @@ namespace TestFWork.Pages
 
         public string GetLetterSubject()
         {
+            WebDriverWaitUtil.WaitElementIsVisible(subjectLetter);
             string emailSubject = subjectLetter.GetElementText();
             return emailSubject;
         }
@@ -94,11 +97,11 @@ namespace TestFWork.Pages
         public bool CheckSpamEmailIsPresent(string emailSubject)
         {
             WebDriverWaitUtil.WaitElementIsVisible(imageSpam);
-            List<String> listEmailSubject = new List<string>();
             foreach (IWebElement ltrs in spamLetters)
             {
-                if (listEmailSubject.Contains(emailSubject))
+                if (ltrs.Text.Contains(emailSubject))
                 {
+                    listEmailSubject.Add(ltrs.Text);
                     return true;
                 }
             }

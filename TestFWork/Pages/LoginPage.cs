@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using TestFWork.Constants;
 using TestFWork.Entities;
 using TestFWork.Utils;
 
@@ -24,13 +25,13 @@ namespace TestFWork.Pages
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public HomePage Login(User user)
+        public HomePage Login()
         {
             WebDriverWaitUtil.WaitElementIsVisible(loginField);
-            loginField.SendText(user.ToString());
+            loginField.SendText(UserConstants.Login);
             buttonMail.ClickElement();
             WebDriverWaitUtil.WaitElementIsVisible(passwordField);
-            passwordField.SendText(user.ToString());
+            passwordField.SendText(UserConstants.Password);
             buttonMail.ClickElement();
             WebDriverWaitUtil.WaitElementIsVisible(logoutLink);
             return new HomePage();

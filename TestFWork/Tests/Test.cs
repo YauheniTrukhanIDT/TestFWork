@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using TestFWork.Constants;
-using TestFWork.Entities;
 using TestFWork.Pages;
 using TestFWork.Utils;
 
@@ -16,7 +15,7 @@ namespace UnitTestProject1
             WebDriverUtil.GetWebDriver().Url = MailRuConstants.MailRuUrl;
             WebDriverUtil.GetWebDriver().Manage().Window.Maximize();
             LoginPage loginPage = new LoginPage();
-            HomePage homePage = loginPage.Login(User.GetDefaultUser());
+            HomePage homePage = loginPage.Login();
             Assert.IsTrue(loginPage.IsLogoutLinkDisplayed());
         }
 
@@ -60,7 +59,9 @@ namespace UnitTestProject1
         public void SearchLetters()
         {
             SearchPage searchPage = new SearchPage();
-            searchPage.SearchLetter();
+            searchPage.ClickInputSearchLetter();
+            searchPage.SendTextInputSearchLetter();
+            searchPage.ClickButtonSearchLetter();
             Assert.IsTrue(searchPage.GetCountSearchLetters() > 0);
         }
 
