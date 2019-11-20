@@ -11,8 +11,11 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//span [@class = '_1Sq-e9MVzbKWUgdGRPfVlE']")]
         private IWebElement buttonSearchLetter { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//input [@class = '_1BEp2b6vqOez8I6Rw9SpK6 _3pRLYQt59tmiwn0Ugfy9W5']")]
+        [FindsBy(How = How.XPath, Using = "//span [@class = 'search-panel-button__text']")]
         private IWebElement inputSearchLetter { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//input [@class = '_1BEp2b6vqOez8I6Rw9SpK6 _3pRLYQt59tmiwn0Ugfy9W5']")]
+        private IWebElement inputSendSearchLetter { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//a [@tabindex = '-1']")]
         private IList<IWebElement> listSearchLetters { get; set; }
@@ -23,20 +26,22 @@ namespace TestFWork.Pages
         }
 
         public void ClickInputSearchLetter()
-        {            
-            buttonSearchLetter.ClickElement();
+        {
+            WebDriverWaitUtil.WaitElementIsVisible(inputSearchLetter);
+            inputSearchLetter.ClickElement();
         }
 
         public void SendTextInputSearchLetter()
-        { 
-            inputSearchLetter.SendText(MailRuConstants.SearchLetters);
+        {
+            WebDriverWaitUtil.WaitElementIsVisible(inputSendSearchLetter);
+            inputSendSearchLetter.SendText(MailRuConstants.SearchLetters);
         }
 
         public void ClickButtonSearchLetter()
         {
             WebDriverWaitUtil.WaitElementIsVisible(buttonSearchLetter);
             buttonSearchLetter.ClickElement();
-            WebDriverWaitUtil.WaitElementIsVisible(listSearchLetters[1]);
+            WebDriverWaitUtil.WaitElementIsVisible(listSearchLetters[0]);
         }
 
         public int GetCountSearchLetters()
