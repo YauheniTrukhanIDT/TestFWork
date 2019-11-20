@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using TestFWork.Constants;
+using TestFWork.Entities;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
@@ -24,13 +24,13 @@ namespace TestFWork.Pages
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public HomePage Login()
+        public HomePage Login(User user)
         {
             WebDriverWaitUtil.WaitElementIsVisible(loginField);
-            loginField.SendText(UserConstants.Login);
+            loginField.SendText(user.ToString());
             buttonMail.ClickElement();
             WebDriverWaitUtil.WaitElementIsVisible(passwordField);
-            passwordField.SendText(UserConstants.Password);
+            passwordField.SendText(user.ToString());
             buttonMail.ClickElement();
             WebDriverWaitUtil.WaitElementIsVisible(logoutLink);
             return new HomePage();
@@ -38,7 +38,7 @@ namespace TestFWork.Pages
 
         public bool IsLogoutLinkDisplayed()        
         {
-            return logoutLink.Displayed && logoutLink.Enabled;                                     
+            return logoutLink.Displayed;                                     
         }
     }
 }

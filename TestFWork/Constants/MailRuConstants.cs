@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestFWork.Constants
+﻿namespace TestFWork.Constants
 {
     public class MailRuConstants
     {
@@ -17,5 +11,7 @@ namespace TestFWork.Constants
         public const string Message = "Hi!";
 
         public const string SearchLetters = "Почта Mail.ru";
+
+        public const int NumberLetter = 0;
     }
 }

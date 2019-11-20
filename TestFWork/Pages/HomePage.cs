@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
 using System.Collections.Generic;
 using TestFWork.Utils;
 
@@ -43,15 +44,37 @@ namespace TestFWork.Pages
         [FindsBy(How = How.XPath, Using = "//span [@class = 'll-rs ll-rs_is-active']")]
         private IList<IWebElement> unReadLetters { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "//span [@class = 'll-sj__normal']")]
+        private IList<IWebElement> spamLetters { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//a [@href = '/spam/']")]
+        private IWebElement windowSpam { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//div [@class = 'portal-menu-element__text']")]
+        private IWebElement imageSpam { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//h2 [@class = 'thread__subject']")]
+        private IWebElement subjectLetter { get; set; }
+
         public HomePage()
         {
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public void SendToSpam()
+        public void SelectLetterToSpam(int i)
         {
             WebDriverWaitUtil.WaitElementIsVisible(inboxLetter);
-            letters[1].ClickElement();
+            letters[i].ClickElement();
+        }
+
+        public string GetLetterSubject()
+        {
+            string emailSubject = subjectLetter.GetElementText();
+            return emailSubject;
+        }
+
+        public void MoveToSpam()
+        {
             WebDriverWaitUtil.WaitElementIsVisible(spamButton);
             spamButton.ClickElement();
         }
@@ -59,7 +82,27 @@ namespace TestFWork.Pages
         public bool IsSendToSpamMessageDisplayed()
         {
             WebDriverWaitUtil.WaitElementIsVisible(spamMessage);
-            return spamMessage.Displayed && spamMessage.Enabled;
+            return spamMessage.Displayed;
+        }
+
+        public void GoToWindowSpam()
+        {
+            WebDriverWaitUtil.WaitElementIsVisible(windowSpam);
+            windowSpam.ClickElement();
+        }
+
+        public bool CheckSpamEmailIsPresent(string emailSubject)
+        {
+            WebDriverWaitUtil.WaitElementIsVisible(imageSpam);
+            List<String> listEmailSubject = new List<string>();
+            foreach (IWebElement ltrs in spamLetters)
+            {
+                if (listEmailSubject.Contains(emailSubject))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void MarkLettersByFlag()

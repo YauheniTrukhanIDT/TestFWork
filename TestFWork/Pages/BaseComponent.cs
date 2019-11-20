@@ -19,5 +19,10 @@ namespace TestFWork.Pages
         {
             return element.GetAttribute(attribute);
         }
+
+        public static string GetElementText(this IWebElement element)
+        {
+            return element.Text;
+        }
     }
 }
