@@ -25,7 +25,7 @@ namespace TestFWork.Pages
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public HomePage Login()
+        public HomePage Login(User user)
         {
             WebDriverWaitUtil.WaitElementIsVisible(loginField);
             loginField.SendText(UserConstants.Login);

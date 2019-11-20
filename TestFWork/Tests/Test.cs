@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using TestFWork.Constants;
+using TestFWork.Entities;
 using TestFWork.Pages;
 using TestFWork.Utils;
 
@@ -15,7 +16,7 @@ namespace UnitTestProject1
             WebDriverUtil.GetWebDriver().Url = MailRuConstants.MailRuUrl;
             WebDriverUtil.GetWebDriver().Manage().Window.Maximize();
             LoginPage loginPage = new LoginPage();
-            HomePage homePage = loginPage.Login();
+            HomePage homePage = loginPage.Login(User.GetDefaultUser());
             Assert.IsTrue(loginPage.IsLogoutLinkDisplayed());
         }
 
