@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using TestFWork.Constants;
 using TestFWork.Utils;
 
 namespace TestFWork.Pages
@@ -30,15 +29,31 @@ namespace TestFWork.Pages
             PageFactory.InitElements(WebDriverUtil.GetWebDriver(), this);
         }
 
-        public void WriteMessage()
+        public void OpenWindowWriteMessage()
         {
             WebDriverWaitUtil.WaitElementIsVisible(buttonWriteLetter);
             buttonWriteLetter.ClickElement();
+        }
+
+        public void WriteAddressee(string addressee)
+        {
             WebDriverWaitUtil.WaitElementIsVisible(recipient);
-            recipient.SendText(MailRuConstants.Addressee);
-            subject.SendText(MailRuConstants.Theme);
+            recipient.SendText(addressee);
+        }
+
+        public void WriteSubject(string theme)
+        {
+            subject.SendText(theme);
+        }
+
+        public void WriteMessage(string text)
+        {
             textMessage.ClickElement();
-            textMessage.SendText(MailRuConstants.Message);
+            textMessage.SendText(text);
+        }
+
+        public void ClickSendButton()
+        {
             sendButton.ClickElement();
         }
 

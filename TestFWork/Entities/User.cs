@@ -9,9 +9,9 @@ namespace TestFWork.Entities
 {
     class User
     {
-        private string Login;
+        private string Login { get; set; }
 
-        private string Password;
+        private string Password { get; set; }
 
         public User(string Login, string Password)
         {

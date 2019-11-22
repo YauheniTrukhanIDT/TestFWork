@@ -122,10 +122,14 @@ namespace TestFWork.Pages
             return lettersMarkFlages.Count;
         }
 
-        public void DropDownList()
+        public void ClickDropDownList()
         {
             WebDriverWaitUtil.WaitElementIsVisible(dropDown);
             dropDownLetters.ClickElement();
+        }
+
+        public void ClickUnReadLetters()
+        {
             WebDriverWaitUtil.WaitElementIsVisible(listDropDown);
             dropDownUnReadLetters.ClickElement();
         }

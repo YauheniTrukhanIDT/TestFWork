@@ -24,7 +24,11 @@ namespace UnitTestProject1
         public void WriteMessage()
         {
             SendLetterPage sendLetterPage = new SendLetterPage();
-            sendLetterPage.WriteMessage();
+            sendLetterPage.OpenWindowWriteMessage();
+            sendLetterPage.WriteAddressee(MailRuConstants.Addressee);
+            sendLetterPage.WriteSubject(MailRuConstants.Theme);
+            sendLetterPage.WriteMessage(MailRuConstants.Message);
+            sendLetterPage.ClickSendButton();
             Assert.IsTrue(sendLetterPage.IsSendMessageDisplayed());
         }
 
@@ -52,7 +56,8 @@ namespace UnitTestProject1
         public void DropDown()
         {
             HomePage homePage = new HomePage();
-            homePage.DropDownList();
+            homePage.ClickDropDownList();
+            homePage.ClickUnReadLetters();
             Assert.IsTrue(homePage.CountUnReadLetters() > 0);
         }
 
